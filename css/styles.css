@@ -44,6 +44,16 @@ body {
   background-color: #f0bcd4;
 }
 
+/* Header */
+header {
+  background-color: #899d78;
+  padding: 20px;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /* main */
 main {
   display: flex;

@@ -6,7 +6,7 @@
   <title>Happily Ever Avatar</title>
   <link rel="stylesheet" href="/css/styles.css">
   <script src="/js/utility-API.js" defer></script>
-  <script src="/js/footer-logic.js" defer></script>
+  <script src="/js/utility-footer.js" defer></script>
 </head>
 <body>
 
@@ -31,12 +31,15 @@
 
     <div class="container">
 
-      <!-- form to upload your image need input to upload image store it somewhere
-      -->
+      <!-- form to upload your image -->
       <div class="form-container">
-        <form action="/upload" method="post" enctype="multipart/form-data">
-          <input type="file" name="image" id="image" accept="image/*">
-          <button type="submit">Upload</button>
+        <h2>Upload your image</h2>
+
+        <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
+        <form action="#" enctype="multipart/form-data">
+          <!-- accept attribute to only allow image files -->
+          <input type="file" id="userImage" name="userImage" accept="image/*">
+          <button type="button" onclick="getAvatarImage()">Upload</button>
         </form>
       </div>
 

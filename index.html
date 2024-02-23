@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happily Ever Avatar</title>
+  <script src="/js/utility-API.js" defer></script>
+  <script src="/js/footer-logic.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to Happily Ever Avatar</h1>
+    <h3>Hours of fun Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae omnis neque, eveniet est numquam et possimus ad sequi obcaecati ratione, rerum inventore ullam autem natus itaque rem nemo. Explicabo, doloribus.</h3>
+  </header>
+
+  <main>
+
+    <div class="container">
+
+      <!-- form to upload your image need input to upload image store it somewhere
+      -->
+      <div class="form-container">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="image" id="image" accept="image/*">
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <!-- image container to display the result-->
+      <div class="image-container">
+        <img src="/images/placeholder.jpg" alt="Your Disneyified image">
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Made by Stacey Fanner, <span id="currentDate"></span></p>
+  </footer>
+  
+</body>
+</html>

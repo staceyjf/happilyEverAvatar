@@ -1,26 +1,31 @@
 // --------------------IMAGE FILE LOGIC----------------------------------
-async function addImage(input) {
-  const formData = new FormData();
-  formData.append('file', input.files[0]); // use the the forms input to source the image file
-  formData.append('upload_preset', 'flatironfinder');
+async function addImage(file) {
+  if (!file) return null;
+
+  // setting up the request body object
+  const data = new FormData();
+  data.append("file", file);
+  data.append("upload_preset", "nology"); 
+  data.append("cloud_name", "dmavbbqol");
 
   try {
-    const response = await fetch("https://api.cloudinary.com/v1_1/my_cloud_name/image/upload", {
-      method: 'POST',
-      body: formData
+    // using unsigned upload preset to upload image to cloudinary
+    const response = await fetch(`https://api.cloudinary.com/v1_1/dmavbbqol/upload`, {
+      method: 'post',
+      body: data,
     });
 
-    if (!response.ok) {
-      throw new Error(`Network response was not ok. Status: ${response.status}`);
+    if (response.ok) {
+      const cloudinaryData = await response.json();
+      const imageUrl = cloudinaryData.secure_url;
+      return imageUrl;
+    } else {
+      console.error('Failed to upload image to Cloudinary');
+      return null;
     }
-
-    const result = await response.json();
-    const cloudinaryUrl = result.url;
-
-    return cloudinaryUrl;
-
   } catch (error) {
-    console.error("Error in addImage:", error);
+    console.error('Error uploading image:', error);
+    return null;
   }
 }
 
@@ -28,12 +33,13 @@ async function addImage(input) {
 async function makeApiRequest(userImageURL) {
   try {
     // Set the REPLICATE_API_TOKEN environment variable
-    const REPLICATE_API_TOKEN = "r8_azjEd7HXV71fZJ21keIFSqDH6gQwMC737FO6a";
+    const REPLICATE_API_TOKEN = "r8_3JCpnj52PBgrY3nBNqLPyl4BfPmBYuH1AMA2A";
   
     // define the parameters for the API request eg what data to send to the API
-    const APIEndpoint = "https://api.replicate.com/v1/predictions";
+    // created my own proxy server to bypass CORS error (cors-anywhere hosted on heroku)
+    const APIEndpoint = "https://floating-oasis-76398-23ee924a082b.herokuapp.com/https://api.replicate.com/v1/predictions";
     const dataRequestObject = {
-      version: "965db2664428311c75f49036a8ff261e1972ac714efd7d7a1c15c808db021b0e",
+      version: "6af8583c541261472e92155d87bba80d5ad98461665802f2ba196ac099aaedc9",
       input: {
         image: userImageURL,
         width: 640,
@@ -52,10 +58,13 @@ async function makeApiRequest(userImageURL) {
     const response = await fetch(APIEndpoint, {
       method: "POST",
       headers: {
+        "Authorization": `Token ${REPLICATE_API_TOKEN}`,
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${REPLICATE_API_TOKEN}`
+        "Origin": "http://127.0.0.1:5500",  
+        "X-Requested-With": "XMLHttpRequest"  
       },
-      body: JSON.stringify(dataRequestObject)
+      body: JSON.stringify(dataRequestObject),
+      mode: 'cors'
     });
   
     // check if the response is ok
@@ -66,7 +75,15 @@ async function makeApiRequest(userImageURL) {
     //parse data
     const data = await response.json();
 
-    return data
+    // Check if the prediction status is "succeeded"
+    if (data.status === "succeeded" && data.output && data.output.length > 0) {
+      // Access the output key to get the image URL
+      const newImageURL = data.output[0];
+      return newImageURL;
+    } else {
+      console.error('Prediction failed or no output image URL found.');
+      return null;
+    }
   
     } catch (e) {
       // handle any errors
@@ -77,23 +94,22 @@ async function makeApiRequest(userImageURL) {
 // --------------------Get Avatar----------------------------------
 async function getAvatarImage() {
   try {
-    // Assuming 'userImageInput' is the actual input element where the user selects the image
     const userImageInput = document.getElementById("userImage");
 
-    // Get the Cloudinary URL from the uploaded image
-    const cloudinaryUrl = await addImage(userImageInput);
+    // get the image file from the input element
+    const selectedFile = userImageInput.files[0];
 
+    const cloudinaryUrl = await addImage(selectedFile);
     console.log("Cloudinary URL:", cloudinaryUrl);
 
-    // If a Cloudinary URL was obtained, make the API request
+    // If a Cloudinary URL was successfully obtained, make the API request
     if (cloudinaryUrl) {
-      console.log("Cloudinary URL has been obtained");
       const apiResponse = await makeApiRequest(cloudinaryUrl);
-      console.log("API request has been made");
+      console.log("API request made");
       // Do something with the API response if needed
       console.log("API response:", apiResponse);
     }
   } catch (error) {
-    console.error("Error in getAvatarImage:", error);
+    console.error("Error for getAvatarImage:", error);
   }
 }

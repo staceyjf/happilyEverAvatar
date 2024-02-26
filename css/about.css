@@ -1,17 +1,14 @@
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+body, html {
+  height: 100%;
+  overflow-y: hidden;
 }
 
-.section {
-  margin-bottom: 20px;
+main {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100%;
 }
 
-.section h3 {
-  color: #333;
-}
-
-.content-item {
-  margin-bottom: 10px;
+.column-wrapper {
+  width: 50%;
 }

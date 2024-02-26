@@ -55,40 +55,66 @@ async function makeApiRequest(userImageURL) {
     
     //make the API request using the fetch API and await response
     //fetch API takes request object and init (contains custom settings)
+    
     const response = await fetch(APIEndpoint, {
       method: "POST",
       headers: {
         "Authorization": `Token ${REPLICATE_API_TOKEN}`,
         "Content-Type": "application/json",
-        "Origin": "http://127.0.0.1:5500",  
-        "X-Requested-With": "XMLHttpRequest"  
+        "Origin": "http://127.0.0.1:5500",
+        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify(dataRequestObject),
-      mode: 'cors'
+      mode: 'cors',
     });
-  
-    // check if the response is ok
-    if (!response.ok) {
-      throw new Error(`Network response was not ok. Status: ${response.status}`); 
-    }
-  
-    //parse data
+
     const data = await response.json();
 
     // Check if the prediction status is "succeeded"
     if (data.status === "succeeded" && data.output && data.output.length > 0) {
-      // Access the output key to get the image URL
       const newImageURL = data.output[0];
       return newImageURL;
+    } else if (data.status === "starting" || data.status === "processing") {
+      // If still processing, initiate polling
+      const predictionId = data.id;
+      const resultUrl = data.urls.get; // Use the provided "get" URL
+
+      // Polling loop
+      const maxAttempts = 30; // Adjust as needed
+      let attempt = 0;
+      let resultData;
+
+      while (attempt < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust the interval (2 seconds in this example)
+
+        const resultResponse = await fetch(resultUrl, {
+          headers: {
+            "Authorization": `Token ${REPLICATE_API_TOKEN}`,
+          },
+        });
+
+        resultData = await resultResponse.json();
+
+        if (resultData.status === "succeeded" && resultData.output && resultData.output.length > 0) {
+          return resultData.output[0];
+        } else if (resultData.status === "failed") {
+          console.error('Prediction failed.');
+          return null;
+        }
+
+        attempt++;
+      }
+
+      console.error('Prediction took too long or failed.');
+      return null;
     } else {
       console.error('Prediction failed or no output image URL found.');
       return null;
     }
-  
-    } catch (e) {
-      // handle any errors
-      console.log(e);
-    }
+  } catch (e) {
+    console.error('Error in makeApiRequest:', e);
+    return null;
+  }
 }
 
 // --------------------Get Avatar----------------------------------

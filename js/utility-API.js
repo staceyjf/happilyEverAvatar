@@ -2,7 +2,7 @@
 async function addImage(file) {
   if (!file) return null;
 
-  // setting up the request body object
+  // setting up the request body object for Cloundary
   const data = new FormData();
   data.append("file", file);
   data.append("upload_preset", "nology"); 
@@ -23,6 +23,7 @@ async function addImage(file) {
       console.error('Failed to upload image to Cloudinary');
       return null;
     }
+
   } catch (error) {
     console.error('Error uploading image:', error);
     return null;
@@ -53,9 +54,7 @@ async function makeApiRequest(userImageURL) {
         }
     }
     
-    //make the API request using the fetch API and await response
-    //fetch API takes request object and init (contains custom settings)
-    
+    //make the API request using the fetch API and await response / fetch API takes request object and init (contains custom settings)
     const response = await fetch(APIEndpoint, {
       method: "POST",
       headers: {
@@ -77,15 +76,15 @@ async function makeApiRequest(userImageURL) {
     } else if (data.status === "starting" || data.status === "processing") {
       // If still processing, initiate polling
       const predictionId = data.id;
-      const resultUrl = data.urls.get; // Use the provided "get" URL
+      const resultUrl = `${APIEndpoint}/${predictionId}`; // Use the provided "get" URL
 
       // Polling loop
-      const maxAttempts = 30; // Adjust as needed
+      const maxAttempts = 30; 
       let attempt = 0;
       let resultData;
 
       while (attempt < maxAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust the interval (2 seconds in this example)
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds between attempts
 
         const resultResponse = await fetch(resultUrl, {
           headers: {
@@ -96,7 +95,7 @@ async function makeApiRequest(userImageURL) {
         resultData = await resultResponse.json();
 
         if (resultData.status === "succeeded" && resultData.output && resultData.output.length > 0) {
-          return resultData.output[0];
+          return resultData.output[0]; //this is the URL of the generated image
         } else if (resultData.status === "failed") {
           console.error('Prediction failed.');
           return null;
@@ -121,19 +120,23 @@ async function makeApiRequest(userImageURL) {
 async function getAvatarImage() {
   try {
     const userImageInput = document.getElementById("userImage");
+    const userImageOutput = document.getElementById("generatedImage");
 
-    // get the image file from the input element
+    // file input to image URL
     const selectedFile = userImageInput.files[0];
-
+    
     const cloudinaryUrl = await addImage(selectedFile);
     console.log("Cloudinary URL:", cloudinaryUrl);
 
-    // If a Cloudinary URL was successfully obtained, make the API request
+    // image url to Instant-ID image
     if (cloudinaryUrl) {
       const apiResponse = await makeApiRequest(cloudinaryUrl);
       console.log("API request made");
-      // Do something with the API response if needed
       console.log("API response:", apiResponse);
+
+      // updated the image placeholder with image
+      userImageOutput.src = apiResponse;
+
     }
   } catch (error) {
     console.error("Error for getAvatarImage:", error);

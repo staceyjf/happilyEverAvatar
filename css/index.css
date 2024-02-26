@@ -1,0 +1,7 @@
+/* main */
+main {
+  align-self: center;
+  display: flex;
+  flex: 1;
+  padding: 50px;
+}

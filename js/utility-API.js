@@ -84,7 +84,7 @@ async function makeApiRequest(userImageURL) {
       let resultData;
 
       while (attempt < maxAttempts) {
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds between attempts
+        await new Promise(resolve => setTimeout(resolve, 4000)); // Wait 2 seconds between attempts
 
         const resultResponse = await fetch(resultUrl, {
           headers: {

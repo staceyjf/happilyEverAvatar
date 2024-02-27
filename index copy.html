@@ -9,8 +9,10 @@
   <script src="/js/utility-API.js" defer></script>
   <script src="/js/utility-footer.js" defer></script>
 </head>
+
 <body>
 
+  
   <nav class="top-nav">
     <ul>
       <!-- TODO: change active to JS function  -->
@@ -23,17 +25,20 @@
     </ul>
   </nav>
 
-  <header>
-    <h1>Welcome to Happily Ever Avatar</h1>
-    <h3>Hours of fun Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae omnis neque, eveniet est numquam et possimus ad sequi obcaecati ratione, rerum inventore ullam autem natus itaque rem nemo. Explicabo, doloribus.</h3>
-  </header>
-
   <main>
+      <div class="column-wrapper">
+        <!-- <div class="image-container"> -->
+          <img  class="image-container" src="/images/heroImage_640x959.jpg" id="generatedImage" alt="Your Disneyified image">
+        <!-- </div> -->
+      </div>
 
-    <div class="container"> 
+      <div class="column-wrapper">
+        <h1>Welcome to Happily Ever Avatar</h1>
+        <h3>Hours of fun Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae omnis neque, eveniet est numquam et possimus ad sequi obcaecati ratione, rerum inventore ullam autem natus itaque rem nemo. Explicabo, doloribus.</h3>
+      </header>
 
-      <!-- form to upload your image -->
-      <div class="form-container">
+       <!-- form to upload your image -->
+       <div class="form-container">
         <h2>Upload your image</h2>
 
         <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
@@ -53,19 +58,12 @@
         </form>
       </div>
 
-      <!-- image container to display the result-->
-      <div class="image-container">
-        <img src="http://via.placeholder.com/640x360" id="generatedImage" alt="Your Disneyified image">
       </div>
-
-    </div>
-    
-
   </main>
 
   <footer>
-    <p>Made by Stacey Fanner, <span id="currentDate"></span></p>
+      <p>Made by Stacey Fanner, &copy; <span id="currentDate"></span></p>
   </footer>
-  
+
 </body>
 </html>

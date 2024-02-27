@@ -6,8 +6,10 @@
   <title>Happily Ever Avatar</title>
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/index.css">
+  <script src="https://kit.fontawesome.com/963119d396.js" crossorigin="anonymous"></script>
   <script src="/js/utility-API.js" defer></script>
   <script src="/js/utility-footer.js" defer></script>
+  <script src="/js/utility-dragAndDrop.js" defer></script>
 </head>
 
 <body>
@@ -39,21 +41,18 @@
        <div class="form-container">
         <h2>Upload your image</h2>
 
-        <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
-        <form action="#" enctype="multipart/form-data">
-          <div class="box_input">
-            <!-- accept attribute to only allow image files -->
-            <input type="file" id="userImage" class="box__file" name="userImage" accept="image/*">
-            <label for="userImage"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-            <button type="button" onclick="getAvatarImage()" class="box__button" >Upload to AI</button>
+        <div class="drag-area">
+          <div class="icon">
+            <i class="fa-solid fa-file-arrow-up"></i>
           </div>
 
-          <!-- display the result of the upload -->
-          <div class="box__uploading">Uploading…</div>
-          <div class="box__success">Done!</div>
-          <div class="box__error">Error! <span></span>.</div>
+          <span class="header">Drag & Drop</span>
+          <span class="header">or <span class="button">browse</span> </span>
+          <span class="support">Supports: JPEG, JPG, PNG</span>
 
-        </form>
+        </div>
+
+
       </div>
 
       </div>
@@ -65,3 +64,18 @@
 
 </body>
 </html>
+
+        <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
+        <form action="#" enctype="multipart/form-data">
+          <div class="box_input">
+            <!-- accept attribute to only allow image files -->
+            <input type="file" id="userImage" class="box__file" name="userImage" accept="image/*">
+            <button type="button" onclick="getAvatarImage()" class="box__button" >Upload to AI</button>
+          </div>
+
+          <!-- display the result of the upload -->
+          <div class="box__uploading">Uploading…</div>
+          <div class="box__success">Done!</div>
+          <div class="box__error">Error! <span></span>.</div>
+
+        </form>

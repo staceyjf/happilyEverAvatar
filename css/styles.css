@@ -39,12 +39,6 @@ body {
   background-color: #DFD6D1;
 }
 
-/* main */
-main {
-  display: flex;
-  max-height: calc(100vh - (5vh + 2vh));
-} 
-
 /* footer */
 footer {
   background-color: #1F232C;

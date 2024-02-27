@@ -1,0 +1,36 @@
+main {
+  padding: 0 5vh;
+  text-align: justify;
+  margin-bottom: 1em;
+}
+
+.box-section {
+  padding: 2vh;
+  margin: 0 8vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #e9e3e2;
+  font-size: 0.8em;
+  gap: 20px
+}
+
+.column-wrapper {
+  text-align: justify;
+}
+
+.column-wrapper h4 {
+  text-align: center;
+}
+
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-wrapper img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 10px 0 #83746E;
+}

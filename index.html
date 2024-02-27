@@ -48,6 +48,8 @@
 
           <span class="header">Drag & Drop</span>
           <span class="header">or <span class="button">browse</span> </span>
+          <!-- accept attribute to only allow image files -->
+          <input type="file" hidden>
           <span class="support">Supports: JPEG, JPG, PNG</span>
 
         </div>
@@ -68,8 +70,6 @@
         <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
         <form action="#" enctype="multipart/form-data">
           <div class="box_input">
-            <!-- accept attribute to only allow image files -->
-            <input type="file" id="userImage" class="box__file" name="userImage" accept="image/*">
             <button type="button" onclick="getAvatarImage()" class="box__button" >Upload to AI</button>
           </div>
 

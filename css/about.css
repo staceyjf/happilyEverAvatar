@@ -1,12 +1,38 @@
 main {
-  padding: 0 5vh;
-  text-align: justify;
-  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: 1fr 740px 1fr;
+}
+
+/* ensure that the content starts at the second column line */
+main > * {
+  grid-column: 2;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+h4 {
+  color: #83746E;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+section {
+  margin: 1.75em 0 1.75em 0;
 }
 
 .box-section {
   padding: 2vh;
-  margin: 0 8vh;
+  margin: 2.5em 0 2.5em 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #e9e3e2;

@@ -1,22 +1,14 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
 }
 
 /* Nav bar */
 .top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  height: 50px;
   background-color: #1F232C;
 }
 
@@ -50,7 +42,7 @@ body {
 /* main */
 main {
   display: flex;
-  flex: 1;
+  max-height: calc(100vh - (5vh + 2vh));
 } 
 
 /* footer */
@@ -59,13 +51,10 @@ footer {
   color: black;
   font-size: x-small;
   text-align: end;
-  bottom: 0;
-  position: absolute;
-  width: 100%;
-  height: auto;
 }
 
 footer > p {
+  color: white;
   margin: 0;
   padding: 10px;
 }

@@ -1,8 +1,11 @@
-# HappilyEverAvatar
+# Happily Ever Avatar
 
-Turn your image into a fairy tale avatar with HappilyEverAvatar! 
+Turn your image into a fairy tale avatar with Happily Ever Avatar! 
 
 This project utilizes vanilla HTML, CSS, and JavaScript to allow users to upload their images and transform them into magical avatars using the Instant-ID AI API.
+
+![HappilyEverAvatar](/images/screenshot_HEA_homepage.png)
+
 
 ## Usage
 

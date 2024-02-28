@@ -200,24 +200,22 @@ async function getAvatarImage(fileURL) {
 
     console.log("fileURL:", fileURL);
 
-    // if (fileURL) {
-    //   // image url to Instant-ID image
+    if (fileURL) {
+      // image url to Instant-ID image
       processingStatus.innerText = "Instant-ID is processing your image...";
       inputButton.disabled = true;
       console.log("API request made");
-    //   const apiResponse = await makeApiRequest(fileURL);
-    //   console.log("API response:", apiResponse);
+      const apiResponse = await makeApiRequest(fileURL);
+      console.log("API response:", apiResponse);
 
-    //   // updated the image placeholder with image
-    //   userImageOutput.src = apiResponse;
-    // userImageOutput.style.backgroundImage = `url('${apiResponse}')`;
-    
+      // updated the image placeholder with image
+      // userImageOutput.src = apiResponse;
+      userImageOutput.style.backgroundImage = `url('${apiResponse}')`;
+  
+      // update status message
+      processingStatus.innerText = "Success! Your image has been processed.";
 
-
-    //   // update status message
-    //   processingStatus.innerText = "Success! Your image has been processed.";
-
-    // }
+    }
   } catch (error) {
     console.error("Error for getAvatarImage:", error);
      // update status message

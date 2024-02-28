@@ -59,6 +59,10 @@ main {
   margin: 10px auto;
 }
 
+h1 {
+  font-size: 3em;
+}
+
 h3 {
   color: #83746E;
   font-weight: 500;

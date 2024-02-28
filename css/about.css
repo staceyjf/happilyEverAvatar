@@ -1,6 +1,6 @@
 main {
   display: grid;
-  grid-template-columns: 1fr 740px 1fr;
+  grid-template-columns: 1fr minmax(auto, 840px)1fr;
 }
 
 /* ensure that the content starts at the second column line */
@@ -24,6 +24,7 @@ h2 {
 p {
   margin-top: 5px;
   line-height: 1.5;
+  font-size: 1.15em;
 }
 
 section {
@@ -36,7 +37,7 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #e9e3e2;
-  font-size: 0.8em;
+  font-size: 0.9em;
   gap: 20px
 }
 

@@ -113,7 +113,7 @@ async function makeApiRequest(userImageURL) {
       headers: {
         "Authorization": `Token ${REPLICATE_API_TOKEN}`,
         "Content-Type": "application/json",
-        "Origin": "http://127.0.0.1:5500",
+        // "Origin": "http://127.0.0.1:5500",
         "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify(dataRequestObject),

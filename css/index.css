@@ -48,17 +48,6 @@ main {
   box-shadow: 0 8px 24px 0 lightgrey
 }
 
-.drag-area {
-  height: 500px;
-  width: 100%;
-  border: 3px dashed lightgrey;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-}
-
 h1 {
   font-size: 3em;
 }
@@ -67,6 +56,17 @@ h3 {
   color: #83746E;
   font-weight: 500;
   margin-bottom: 8vh;
+}
+
+.drag-area {
+  height: 450px;
+  width: 100%;
+  border: 3px dashed lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
 }
 
 .drag-area .icon {

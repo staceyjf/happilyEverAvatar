@@ -1,16 +1,16 @@
 main {
-  /* max-height: calc(100vh - (5vh + 0.5vh)); */
   display: flex;
 }
 
+/* Column left */
 .column-wrapper {
-  /* width: 50%; */
-  text-align: justify;
+  text-align: center;
 }
 
+/* Column right */
 .column-right {
   padding: 5em;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .image-container {
@@ -22,10 +22,6 @@ main {
   background-image: url('../images/heroImage_640x959.jpg');
 }
 
-/* .image-container img {
-  width: 100%;
-  height: 100%;
-} */
 
 .form-wrapper {
   display: flex;
@@ -34,6 +30,7 @@ main {
   justify-self: center;
 }
 
+/* Drag n drop*/
 .form-container {
   box-sizing: border-box;
   display: flex;
@@ -55,7 +52,9 @@ h1 {
 h3 {
   color: #83746E;
   font-weight: 500;
-  margin-bottom: 8vh;
+  text-align: justify;
+  padding: 1em;
+  line-height: 1.5;
 }
 
 .drag-area {
@@ -100,8 +99,25 @@ h3 {
   object-fit: cover;
 }
 
+/* Artist prompt */
+.user-prompt {
+  padding: 30px;
+}
+
+.user-prompt > input {
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+.user-prompt > label {
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+/* AI button */
 .box-button {
-  margin-top: 5vh;
+  margin-top: 2vh;
   padding: 10px 20px;
   border-radius: 10px;
   background: #1F232C;

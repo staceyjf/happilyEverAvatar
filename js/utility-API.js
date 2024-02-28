@@ -1,7 +1,7 @@
 // --------------------Global Variables-----------------------
 const dragArea = document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
-let button = document.querySelector('.button');
+let button = document.querySelector('.header .button');
 let input = document.querySelector('input');
 const processingStatus = document.getElementById("box_status");
 
@@ -88,7 +88,25 @@ async function makeApiRequest(userImageURL) {
   try {
     // Set the REPLICATE_API_TOKEN environment variable
     const REPLICATE_API_TOKEN = "r8_3JCpnj52PBgrY3nBNqLPyl4BfPmBYuH1AMA2A";
+
+    let userPrompt;
+
+    // the user's artistic prompt choice
+    const selectedStyle = document.querySelector('.user-prompt input[name="user-prompt"]:checked').value;
+    console.log("User's choice:", selectedStyle);
+
+    //user prompts
+    if (selectedStyle === "minimalist") {
+      userPrompt = "minimalist, very intricate colours, simplified continuous line colour drawing in the style of ink pen drawing by Michelangelo, white background, colours, heavy use of palette knives, only inky real colours on paper (colours)";
+    } else if (selectedStyle === "impressionist") {
+      userPrompt = "impressionist painting, capturing the essence of brushstrokes and color blending. Apply a painterly effect that emulates the style of artists like Monet or Van Gogh. Focus on creating a vibrant and textured appearance";
+    } else if (selectedStyle === "disney") {
+      userPrompt = "animated princess look in the style of Disney's Elsa of Frozen. Colours should be bright and playful."
+    };
   
+
+    console.log("User's prompt:", userPrompt);
+
     // define the parameters for the API request eg what data to send to the API
     // created my own proxy server to bypass CORS error (cors-anywhere hosted on heroku)
     const APIEndpoint = "https://floating-oasis-76398-23ee924a082b.herokuapp.com/https://api.replicate.com/v1/predictions";
@@ -98,14 +116,16 @@ async function makeApiRequest(userImageURL) {
         image: userImageURL,
         width: 640,
         height: 640,
-        prompt: "minimalist, very intricate colours, simplified continuous line colour drawing in the style of ink pen drawing by Michelangelo, white background, colours, heavy use of palette knives, only inky real colours on paper (colours)",
+        prompt: userPrompt,
         guidance_scale: 5,
-        negative_prompt: "(lowres, low quality, worst quality:1.2), (text:1.2), watermark, painting, drawing, illustration, glitch, deformed, mutated, cross-eyed, ugly, disfigured (lowres, low quality, worst quality:1.2), (text:1.2), watermark, painting, drawing, illustration, glitch,deformed, mutated, cross-eyed, ugly, disfigured, plain",
+        negative_prompt: "(lowres, low quality, worst quality:1.2), (text:1.2), watermark, glitch, deformed, mutated, cross-eyed, ugly, disfigured,plain",
         ip_adapter_scale: 0.8,
         num_inference_steps: 30,
         controlnet_conditioning_scale: 0.8
         }
     }
+
+    console.log("dataRequestObject:", dataRequestObject);
     
     //make the API request using the fetch API and await response / fetch API takes request object and init (contains custom settings)
     const response = await fetch(APIEndpoint, {
@@ -113,7 +133,6 @@ async function makeApiRequest(userImageURL) {
       headers: {
         "Authorization": `Token ${REPLICATE_API_TOKEN}`,
         "Content-Type": "application/json",
-        // "Origin": "http://127.0.0.1:5500",
         "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify(dataRequestObject),
@@ -132,7 +151,7 @@ async function makeApiRequest(userImageURL) {
       const resultUrl = `${APIEndpoint}/${predictionId}`; // Use the provided "get" URL
 
       // Polling loop
-      const maxAttempts = 30; 
+      const maxAttempts = 100; 
       let attempt = 0;
       let resultData;
 
@@ -182,8 +201,7 @@ async function uploadImage(file) {
       let imgTag = `<img src="${processImageURL}" alt="user's image" class="image">`;
       dragArea.innerHTML = imgTag;
       console.log("placeholder updated with image");
-    }
-    
+    }    
   } catch (error) {
     console.error("Error for getAvatarImage:", error);
      // update status message
@@ -209,7 +227,6 @@ async function getAvatarImage(fileURL) {
       console.log("API response:", apiResponse);
 
       // updated the image placeholder with image
-      // userImageOutput.src = apiResponse;
       userImageOutput.style.backgroundImage = `url('${apiResponse}')`;
   
       // update status message

@@ -3,7 +3,7 @@ main {
   grid-template-columns: 1fr minmax(auto, 840px)1fr;
 }
 
-/* ensure that the content starts at the second column line */
+/* ensures that the content starts at the second column line */
 main > * {
   grid-column: 2;
 }
@@ -13,18 +13,18 @@ h1 {
   margin-bottom: 0;
 }
 
-h3 {
-  color: #83746E;
-}
-
 h2 {
   margin: 0;
+}
+
+h3 {
+  color: #83746E;
+  line-height: 1.5;
 }
 
 p {
   margin-top: 5px;
   line-height: 1.5;
-  font-size: 1.15em;
 }
 
 section {

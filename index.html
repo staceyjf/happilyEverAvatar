@@ -14,57 +14,70 @@
 
 <body>
 
-    <nav class="top-nav">
-        <ul>
-            <!-- TODO: change active to JS function  -->
-            <li class="active">
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a href="about.html">About</a>
-            </li>
-        </ul>
-    </nav>
+  <nav class="top-nav">
+      <ul>
+          <li class="active">
+              <a href="index.html">Home</a>
+          </li>
+          <li>
+              <a href="about.html">About</a>
+          </li>
+      </ul>
+  </nav>
 
-    <main>
-        <div class="column-wrapper image-container" id="generatedImage">
-            <!-- <img src="/images/heroImage_640x959.jpg" id="generatedImage" alt="Your Disneyified image"> -->
-        </div>
+  <main>
+      <!--------- image-container ------------>
+      <div class="column-wrapper image-container" id="generatedImage"></div>
 
-        <div class="column-wrapper column-right">
-          <div class="form-wrapper">
+      <!--------- Form and text container ---->
+      <div class="column-wrapper column-right">
+        <div class="form-wrapper">
           <h1>Welcome to Happily Ever Avatar</h1>
-          <h3>Hours of fun Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae omnis neque, eveniet est
-              numquam et possimus ad sequi obcaecati ratione, rerum inventore ullam autem natus itaque rem nemo.
-              Explicabo, doloribus.</h3>
-                
-            <!-- form to upload your image -->
-            <div class="form-container">
-              <!-- display the result of the upload -->
-              <h2 id="box_status">Upload your image</h2>
-              
-              <div class="drag-area">
-                <div class="icon">
-                  <i class="fa-solid fa-file-arrow-up"></i>
-                </div>
-                
-                <span class="header">Drag & Drop</span>
-                <span class="header">or <span class="button">browse</span> </span>
-                <!-- accept attribute to only allow image files -->
-                <input type="file" hidden>
-                <span class="support">Supports: JPEG, JPG, PNG</span>
-                
-              </div>
-            </div>
-            
-            <button type="button" onclick="getAvatarImage(fileURL)" class="box-button" id="AI-input-button">Upload to AI</button>
-          </div>
-        </div>
-    </main>
+          <h3>Hours of fun Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae omnis neque, eveniet est numquam et possimus ad sequi obcaecat ratione, rerum inventore ullam autem natus itaque rem nemo. Explicabo, doloribus.
+            <br><br>
+            amet consectetur adipisicing elit. Quae omnis neque, eveniet est numquam et possimus ad sequi obcaecat ratione, rerum inventore ullam autem natus itaque rem nemo. Explicabo, doloribus.
+          </h3>
 
-    <footer>
-        <p>Made by Stacey Fanner, &copy; <span id="currentDate"></span></p>
-    </footer>
+          <!-- form to upload your image -->
+          <div class="form-container">
+            <!-- display the result of the upload -->
+            <h2 id="box_status">Upload your image</h2>
+            
+            <div class="drag-area">
+              <div class="icon">
+                <i class="fa-solid fa-file-arrow-up"></i>
+              </div>
+              
+              <span class="header">Drag & Drop</span>
+              <span class="header">or <span class="button">browse</span> </span>
+              <!-- accept attribute to only allow image files -->
+              <input type="file" hidden>
+              <span class="support">Supports: JPEG, JPG, PNG</span>
+              
+            </div>
+          </div>
+
+          <!--------- User prompt -------------------->
+            <div class="user-prompt">
+              <h2>Choose your artist style</h2>
+              <input type="radio" id="minimalist" name="user-prompt" value="minimalist" checked>
+              <label for="minimalist">Minimalist</label><br>
+              <input type="radio" id="impressionist" name="user-prompt" value="impressionist">
+              <label for="impressionist">Impressionist</label><br>
+              <input type="radio" id="disney" name="user-prompt" value="disney">
+              <label for="disney">Disney Princess</label>
+            </div>
+          
+          <!--------- Button to upload image to AI ---->  
+          <button type="button" onclick="getAvatarImage(fileURL)" class="box-button" id="AI-input-button">Upload to AI</button>
+
+        </div>
+      </div>
+  </main>
+
+  <footer>
+    <p>Made by Stacey Fanner, &copy; <span id="currentDate"></span></p>
+  </footer>
 
 </body>
 

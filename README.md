@@ -8,22 +8,30 @@ This project utilizes vanilla HTML, CSS, and JavaScript to allow users to upload
 
 1. Open the application in your web browser.
 
-2. Click on the "Upload" button to select an image.
+2. Upload your image.
 
-3. Wait for the transformation process to complete using the Instant-ID AI API.
+3. Choose your artistic style.
 
-4. Enjoy your fairy tale avatar!
+4. Click on the "Upload to AI" button to generate your request.
+
+5. Wait for the transformation process to complete using the Instant-ID AI API.
+
+6. Enjoy your avatar!
 
 ## User stories
 
 1. I want to upload an image file from my local machine
 
-2. I want my uploaded image to be modified by a prompt of my choice
+2. I want to choose an artistic style for my generated image
+
+3. I want my uploaded image to be modified by a prompt of my choice
 
 ## MVP
 
 1. Get a user photo upload modified using a set of fixed prompts
 
+2. Users should have the ability to add their own prompt
+
 ## Icebox
 
-1. Users should have the ability to add their own prompt
+1. Including a loading animation to help user's now that the AI is working

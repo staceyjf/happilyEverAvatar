@@ -27,8 +27,8 @@
     </nav>
 
     <main>
-        <div class="column-wrapper image-container">
-            <img src="/images/heroImage_640x959.jpg" id="generatedImage" alt="Your Disneyified image">
+        <div class="column-wrapper image-container" id="generatedImage">
+            <!-- <img src="/images/heroImage_640x959.jpg" id="generatedImage" alt="Your Disneyified image"> -->
         </div>
 
         <div class="column-wrapper column-right">
@@ -57,7 +57,7 @@
               </div>
             </div>
             
-            <button type="button" onclick="getAvatarImage(fileURL)" class="box_button">Upload to AI</button>
+            <button type="button" onclick="getAvatarImage(fileURL)" class="box-button" id="AI-input-button">Upload to AI</button>
           </div>
         </div>
     </main>

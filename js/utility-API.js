@@ -196,17 +196,23 @@ async function getAvatarImage(fileURL) {
   try {
     const userImageOutput = document.getElementById("generatedImage");
 
+    const inputButton = document.getElementById("AI-input-button");
+
     console.log("fileURL:", fileURL);
 
     // if (fileURL) {
     //   // image url to Instant-ID image
-    //   processingStatus.innerText = "Instant-ID is processing your image...";
-    //   console.log("API request made");
+      processingStatus.innerText = "Instant-ID is processing your image...";
+      inputButton.disabled = true;
+      console.log("API request made");
     //   const apiResponse = await makeApiRequest(fileURL);
     //   console.log("API response:", apiResponse);
 
     //   // updated the image placeholder with image
     //   userImageOutput.src = apiResponse;
+    // userImageOutput.style.backgroundImage = `url('${apiResponse}')`;
+    
+
 
     //   // update status message
     //   processingStatus.innerText = "Success! Your image has been processed.";
@@ -216,6 +222,7 @@ async function getAvatarImage(fileURL) {
     console.error("Error for getAvatarImage:", error);
      // update status message
      processingStatus.innerText = "Oh no! Something went wrong. Please try again.";
+     inputButton.disabled = false;
   }
 }
 

@@ -9,7 +9,6 @@
   <script src="https://kit.fontawesome.com/963119d396.js" crossorigin="anonymous"></script>
   <script src="/js/utility-API.js" defer></script>
   <script src="/js/utility-footer.js" defer></script>
-  <script src="/js/utility-dragAndDrop.js" defer></script>
 </head>
 
 <body>
@@ -53,9 +52,10 @@
           <span class="support">Supports: JPEG, JPG, PNG</span>
 
         </div>
-
-
       </div>
+
+          <!-- display the result of the upload -->
+          <div id="box_status"></div>
 
       </div>
   </main>
@@ -66,16 +66,3 @@
 
 </body>
 </html>
-
-        <!-- use # for action & button type to override default form behaviour / prevent a page reload -->
-        <form action="#" enctype="multipart/form-data">
-          <div class="box_input">
-            <button type="button" onclick="getAvatarImage()" class="box__button" >Upload to AI</button>
-          </div>
-
-          <!-- display the result of the upload -->
-          <div class="box__uploading">Uploading…</div>
-          <div class="box__success">Done!</div>
-          <div class="box__error">Error! <span></span>.</div>
-
-        </form>

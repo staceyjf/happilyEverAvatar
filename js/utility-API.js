@@ -1,33 +1,82 @@
-// --------------------IMAGE FILE LOGIC----------------------------------
-async function addImage(file) {
-  if (!file) return null;
+// --------------------Variables-----------------------
+const dragArea = document.querySelector('.drag-area');
+const dragText = document.querySelector('.header');
+let button = document.querySelector('.button');
+let input = document.querySelector('input');
+const processingStatus = document.getElementById("box_status");
 
-  // setting up the request body object for Cloundary
-  const data = new FormData();
-  data.append("file", file);
-  data.append("upload_preset", "nology"); 
-  data.append("cloud_name", "dmavbbqol");
+let file;
 
-  try {
-    // using unsigned upload preset to upload image to cloudinary
-    const response = await fetch(`https://api.cloudinary.com/v1_1/dmavbbqol/upload`, {
-      method: 'post',
-      body: data,
-    });
+// --------------------IMAGE FILE LOGIC-----------------------
+// --------------------Browse LOGIC-----------------------
+// browse 'button' feature
+button.onclick = () => {
+  input.click();
+};
 
-    if (response.ok) {
-      const cloudinaryData = await response.json();
-      const imageUrl = cloudinaryData.secure_url;
-      return imageUrl;
-    } else {
-      console.error('Failed to upload image to Cloudinary');
-      return null;
+// when file is added, process file
+input.addEventListener('change', async () => {
+  file = input.files[0]; // select the file
+  dragArea.classList.add('active');
+  processFile.innerHTML = "File selected. Processing image...";
+  getAvatarImage(file);
+});
+
+// --------------------Drag & Drop LOGIC-----------------------
+//when file is inside the drag area
+dragArea.addEventListener('dragover', (event) => {
+  event.preventDefault();
+  dragText.textContent = 'Release to Upload';
+  dragArea.classList.add('active');
+});
+
+// when file is outside the drag area
+dragArea.addEventListener('dragleave', () => {
+  dragText.textContent = 'Drag & Drop';
+  dragArea.classList.remove('active');
+});
+
+// when file is dropped
+dragArea.addEventListener('drop', async (event) => {
+  event.preventDefault(); // to provide the image from opening in another browser tab
+  file = event.dataTransfer.files[0];
+  processFile.innerHTML = "File selected. Processing image...";
+  getAvatarImage(file);
+});
+
+// --------------------File processing LOGIC-----------------------
+function processFile(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject(new Error('No file selected.'));
+      return;
     }
 
-  } catch (error) {
-    console.error('Error uploading image:', error);
-    return null;
-  }
+    let fileType = file.type;
+    let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+    if (validExtensions.includes(fileType)) {
+      console.log('Valid file type');
+
+      let fileReader = new FileReader();
+      let fileURL;
+
+      // when the file is read, convert it into a data URL
+      fileReader.onload = () => {
+        // Retrieve the result, which is a data URL representing the file
+        fileURL = fileReader.result;
+        // console.log('File URL:', fileURL);
+        resolve(fileURL);
+      };
+
+      // read the file as a data URL
+      fileReader.readAsDataURL(file);
+
+    } else {
+      reject(new Error('Invalid file type. Please upload an image file.'));
+      dragArea.classList.remove('active');
+    }
+  });
 }
 
 // --------------------API LOGIC------------------------------
@@ -94,6 +143,8 @@ async function makeApiRequest(userImageURL) {
 
         resultData = await resultResponse.json();
 
+        processFile.innerHTML = "Instant-ID is working hard to process your image...";
+
         if (resultData.status === "succeeded" && resultData.output && resultData.output.length > 0) {
           return resultData.output[0]; //this is the URL of the generated image
         } else if (resultData.status === "failed") {
@@ -117,28 +168,33 @@ async function makeApiRequest(userImageURL) {
 }
 
 // --------------------Get Avatar----------------------------------
-async function getAvatarImage() {
+async function getAvatarImage(file) {
   try {
-    const userImageInput = document.getElementById("userImage");
     const userImageOutput = document.getElementById("generatedImage");
+    const fileURL = await processFile(file);
 
-    // file input to image URL
-    const selectedFile = userImageInput.files[0];
-    
-    const cloudinaryUrl = await addImage(selectedFile);
-    console.log("Cloudinary URL:", cloudinaryUrl);
+    if (fileURL) {
+      //display image
+      let imgTag = `<img src="${fileURL}" alt="user's image" class="image">`;
+      dragArea.innerHTML = imgTag;
+      console.log("placeholder updared with image");
 
-    // image url to Instant-ID image
-    if (cloudinaryUrl) {
-      const apiResponse = await makeApiRequest(cloudinaryUrl);
+      // image url to Instant-ID image
+      processFile.innerHTML = "Instant-ID is processing your image...";
       console.log("API request made");
+      const apiResponse = await makeApiRequest(fileURL);
       console.log("API response:", apiResponse);
 
       // updated the image placeholder with image
       userImageOutput.src = apiResponse;
 
+      // update status message
+      processFile.innerHTML = "Success! Your image has been processed.";
+
     }
   } catch (error) {
     console.error("Error for getAvatarImage:", error);
+     // update status message
+     processFile.innerHTML = "Oh no! Something went wrong. Please try again.";
   }
 }

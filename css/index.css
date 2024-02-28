@@ -1,5 +1,5 @@
 main {
-  max-height: calc(100vh - (5vh + 2vh));
+  max-height: calc(100vh - (5vh + 0.5vh));
   display: flex;
 }
 
@@ -17,6 +17,13 @@ main {
   height: 100%;
 }
 
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  margin-top: 5vh;
+}
 
 .form-container {
   box-sizing: border-box;
@@ -25,7 +32,7 @@ main {
   align-items: center;
   justify-content: center;
   background: #e0eafc;
-  max-width: 650px;
+  max-width: 1000px;
   width: 100%;
   padding: 30px;
   border-radius: 20px;
@@ -33,7 +40,7 @@ main {
 }
 
 .drag-area {
-  height: 400px;
+  height: 600px;
   width: 100%;
   border: 3px dashed lightgrey;
   display: flex;
@@ -78,4 +85,13 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.box_button {
+  margin-top: 5vh;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #1F232C;
+  color: white;
+  font-weight: bold;
 }

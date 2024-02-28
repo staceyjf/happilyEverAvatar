@@ -19,8 +19,8 @@ button.onclick = () => {
 input.addEventListener('change', async () => {
   file = input.files[0]; // select the file
   dragArea.classList.add('active');
-  processingStatus.innerText = "File selected. Processing image...";
   uploadImage(file);
+  processingStatus.innerText = "File selected. Click 'Upload to AI' to process your image.";
 });
 
 // --------------------Drag & Drop LOGIC-----------------------
@@ -44,8 +44,8 @@ dragArea.addEventListener('drop', async (event) => {
 
   // need to change it to a Binary Large Object to ensure the API receives a consistent format as file input can vary from browser to browser
   const blob = new Blob([file], { type: file.type });
-  processingStatus.innerText = "File selected. Processing image...";
   uploadImage(blob);
+  processingStatus.innerText = "File selected. Click 'Upload to AI' ";
 });
 
 

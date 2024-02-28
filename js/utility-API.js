@@ -1,4 +1,4 @@
-// --------------------Variables-----------------------
+// --------------------Global Variables-----------------------
 const dragArea = document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
 let button = document.querySelector('.button');
@@ -6,8 +6,9 @@ let input = document.querySelector('input');
 const processingStatus = document.getElementById("box_status");
 
 let file;
+let fileURL;
 
-// --------------------IMAGE FILE LOGIC-----------------------
+// --------------------Event Listeners-----------------------
 // --------------------Browse LOGIC-----------------------
 // browse 'button' feature
 button.onclick = () => {
@@ -18,8 +19,8 @@ button.onclick = () => {
 input.addEventListener('change', async () => {
   file = input.files[0]; // select the file
   dragArea.classList.add('active');
-  processFile.innerHTML = "File selected. Processing image...";
-  getAvatarImage(file);
+  processingStatus.innerText = "File selected. Processing image...";
+  uploadImage(file);
 });
 
 // --------------------Drag & Drop LOGIC-----------------------
@@ -40,9 +41,14 @@ dragArea.addEventListener('dragleave', () => {
 dragArea.addEventListener('drop', async (event) => {
   event.preventDefault(); // to provide the image from opening in another browser tab
   file = event.dataTransfer.files[0];
-  processFile.innerHTML = "File selected. Processing image...";
-  getAvatarImage(file);
+
+  // need to change it to a Binary Large Object to ensure the API receives a consistent format as file input can vary from browser to browser
+  const blob = new Blob([file], { type: file.type });
+  processingStatus.innerText = "File selected. Processing image...";
+  uploadImage(blob);
 });
+
+
 
 // --------------------File processing LOGIC-----------------------
 function processFile(file) {
@@ -59,13 +65,11 @@ function processFile(file) {
       console.log('Valid file type');
 
       let fileReader = new FileReader();
-      let fileURL;
-
       // when the file is read, convert it into a data URL
       fileReader.onload = () => {
-        // Retrieve the result, which is a data URL representing the file
+        // Retrieve the result, which is a data URL representing the file and update the global fileURL variable
         fileURL = fileReader.result;
-        // console.log('File URL:', fileURL);
+        console.log('File URL:', fileURL);
         resolve(fileURL);
       };
 
@@ -143,7 +147,7 @@ async function makeApiRequest(userImageURL) {
 
         resultData = await resultResponse.json();
 
-        processFile.innerHTML = "Instant-ID is working hard to process your image...";
+        processingStatus.innerText = "Instant-ID is working hard to process your image...";
 
         if (resultData.status === "succeeded" && resultData.output && resultData.output.length > 0) {
           return resultData.output[0]; //this is the URL of the generated image
@@ -167,34 +171,52 @@ async function makeApiRequest(userImageURL) {
   }
 }
 
-// --------------------Get Avatar----------------------------------
-async function getAvatarImage(file) {
+// --------------------Display original image----------------------------------
+async function uploadImage(file) {
   try {
-    const userImageOutput = document.getElementById("generatedImage");
-    const fileURL = await processFile(file);
+    const processImageURL = await processFile(file);
+    console.log("processImageURL:", processImageURL);
 
-    if (fileURL) {
-      //display image
-      let imgTag = `<img src="${fileURL}" alt="user's image" class="image">`;
+    if (processImageURL) {
+      // add the display image into the dragArea
+      let imgTag = `<img src="${processImageURL}" alt="user's image" class="image">`;
       dragArea.innerHTML = imgTag;
-      console.log("placeholder updared with image");
-
-      // image url to Instant-ID image
-      processFile.innerHTML = "Instant-ID is processing your image...";
-      console.log("API request made");
-      const apiResponse = await makeApiRequest(fileURL);
-      console.log("API response:", apiResponse);
-
-      // updated the image placeholder with image
-      userImageOutput.src = apiResponse;
-
-      // update status message
-      processFile.innerHTML = "Success! Your image has been processed.";
-
+      console.log("placeholder updated with image");
     }
+    
   } catch (error) {
     console.error("Error for getAvatarImage:", error);
      // update status message
-     processFile.innerHTML = "Oh no! Something went wrong. Please try again.";
+     processingStatus.innerText = "Oh no! Something went wrong. Please try again.";
   }
 }
+
+// --------------------Get & display Avatar----------------------------------
+async function getAvatarImage(fileURL) {
+  try {
+    const userImageOutput = document.getElementById("generatedImage");
+
+    console.log("fileURL:", fileURL);
+
+    // if (fileURL) {
+    //   // image url to Instant-ID image
+    //   processingStatus.innerText = "Instant-ID is processing your image...";
+    //   console.log("API request made");
+    //   const apiResponse = await makeApiRequest(fileURL);
+    //   console.log("API response:", apiResponse);
+
+    //   // updated the image placeholder with image
+    //   userImageOutput.src = apiResponse;
+
+    //   // update status message
+    //   processingStatus.innerText = "Success! Your image has been processed.";
+
+    // }
+  } catch (error) {
+    console.error("Error for getAvatarImage:", error);
+     // update status message
+     processingStatus.innerText = "Oh no! Something went wrong. Please try again.";
+  }
+}
+
+

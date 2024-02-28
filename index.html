@@ -38,7 +38,8 @@
 
        <!-- form to upload your image -->
        <div class="form-container">
-        <h2>Upload your image</h2>
+        <!-- display the result of the upload -->
+        <h2 id="box_status">Upload your image</h2>
 
         <div class="drag-area">
           <div class="icon">
@@ -54,8 +55,7 @@
         </div>
       </div>
 
-          <!-- display the result of the upload -->
-          <div id="box_status"></div>
+      <button type="button" onclick="getAvatarImage(fileURL)" class="box_button" >Upload to AI</button>
 
       </div>
   </main>

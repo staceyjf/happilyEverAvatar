@@ -6,6 +6,7 @@ This project utilizes vanilla HTML, CSS, and JavaScript to allow users to upload
 
 ![HappilyEverAvatar](/images/screenshot_HEA_homepage.png)
 
+Have a play at: https://staceyjf.github.io/happilyEverAvatar/index.html 
 
 ## Usage
 

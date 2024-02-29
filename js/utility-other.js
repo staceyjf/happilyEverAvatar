@@ -1,4 +1,4 @@
-// using the locale settings of the browser
+// footer logic for date
 function getTodaysDate() {
   const currentDate = new Date();
   const formatOptions = { month: 'short', year: 'numeric' };

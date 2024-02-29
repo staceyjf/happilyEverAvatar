@@ -1,9 +1,10 @@
 // --------------------Global Variables-----------------------
 const dragArea = document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
+const showLoadingWheel = document.getElementById("loadingOverlay");
+const processingStatus = document.getElementById("box_status");
 let button = document.querySelector('.header .button');
 let input = document.querySelector('input');
-const processingStatus = document.getElementById("box_status");
 
 let file;
 let fileURL;
@@ -213,15 +214,17 @@ async function uploadImage(file) {
 async function getAvatarImage(fileURL) {
   try {
     const userImageOutput = document.getElementById("generatedImage");
-
     const inputButton = document.getElementById("AI-input-button");
-
+   
     console.log("fileURL:", fileURL);
 
     if (fileURL) {
-      // image url to Instant-ID image
+      // status update
       processingStatus.innerText = "Instant-ID is processing your image...";
       inputButton.disabled = true;
+      showLoadingWheel.style.display = "flex"
+      
+      // image url to Instant-ID image
       console.log("API request made");
       const apiResponse = await makeApiRequest(fileURL);
       console.log("API response:", apiResponse);
@@ -231,6 +234,7 @@ async function getAvatarImage(fileURL) {
   
       // update status message
       processingStatus.innerText = "Success! Your image has been processed.";
+      showLoadingWheel.style.display = "none";
 
     }
   } catch (error) {

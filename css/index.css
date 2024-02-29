@@ -9,7 +9,11 @@ main {
 
 /* Column right */
 .column-right {
-  padding: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
   margin: 0 auto;
 }
 
@@ -21,7 +25,6 @@ main {
   background-repeat: no-repeat;
   background-image: url('../images/heroImage_640x959.jpg');
 }
-
 
 .form-wrapper {
   display: flex;
@@ -38,7 +41,7 @@ main {
   align-items: center;
   justify-content: center;
   background: #e0eafc;
-  max-width: 900px;
+  max-width: 650px;
   width: 100%;
   padding: 30px;
   border-radius: 20px;
@@ -52,12 +55,12 @@ h1 {
 h3 {
   color: #83746E;
   font-weight: 500;
-  padding: 1em;
   line-height: 1.5;
+  margin-bottom: 2em;
 }
 
 .drag-area {
-  height: 450px;
+  height: 400px;
   width: 100%;
   border: 3px dashed lightgrey;
   display: flex;
@@ -72,7 +75,7 @@ h3 {
 }
 
 .drag-area .header {
-  font-size: 20px;
+  /* font-size: 20px; */
   font-weight: 500;
 } 
 
@@ -98,19 +101,40 @@ h3 {
   object-fit: cover;
 }
 
+/* loading animation*/
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.overlay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); 
+}
+
 /* Artist prompt */
 .user-prompt {
-  padding: 30px;
+  /* padding: 30px; */
 }
 
 .user-prompt > input {
-  margin: 10px 0;
+  margin: 5px 0;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
 
 .user-prompt > label {
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   margin-left: 10px;
 }
 

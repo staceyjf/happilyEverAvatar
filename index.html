@@ -7,9 +7,10 @@
     <title>Happily Ever Avatar</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/loadingAnimation.css">
     <script src="https://kit.fontawesome.com/963119d396.js" crossorigin="anonymous"></script>
     <script src="/js/utility-API.js" defer></script>
-    <script src="/js/utility-footer.js" defer></script>
+    <script src="/js/utility-other.js" defer></script>
 </head>
 
 <body>
@@ -33,11 +34,7 @@
       <div class="column-wrapper column-right">
         <div class="form-wrapper">
           <h1>Welcome to Happily Ever Avatar</h1>
-          <h3>Embark on a journey into the enchanting world of Happily Ever Avatar, where imagination knows no bounds and joy awaits at every turn. 
-            <br><br>
-            Here, you can transform your photo into a whimsical avatar that captures the essence of your unique spirit. Choose from a variety of artistic styles, from minimalist to Disney princess, and watch as your image is magically transformed into a delightful work of art. Share your avatar with friends and family, and let the magic of Happily Ever Avatar bring a smile to your face and theirs.
-          <br><br>
-          Upload your image and let the magic begin!
+          <h3> Choose from a variety of artistic styles, from minimalist to Disney princess, and watch as your image is magically transformed into a delightful work of art. Upload your image and let the magic begin!
           </h3>
 
           <!-- form to upload your image -->
@@ -45,16 +42,26 @@
             <!-- display the result of the upload -->
             <h2 id="box_status">Upload your image</h2>
             
-            <div class="drag-area">
-              <div class="icon">
-                <i class="fa-solid fa-file-arrow-up"></i>
+            <div class="spinner-container">
+              <div class="drag-area">
+                <div class="icon">
+                  <i class="fa-solid fa-file-arrow-up"></i>
+                </div>
+                
+                <span class="header">Drag & Drop</span>
+                <span class="header">or <span class="button">browse</span> </span>
+                <!-- accept attribute to only allow image files -->
+                <input type="file" hidden>
+                <span class="support">Supports: JPEG, JPG, PNG</span>
+                
               </div>
               
-              <span class="header">Drag & Drop</span>
-              <span class="header">or <span class="button">browse</span> </span>
-              <!-- accept attribute to only allow image files -->
-              <input type="file" hidden>
-              <span class="support">Supports: JPEG, JPG, PNG</span>
+              <!--------- Loading spinner overlay -------------------->
+              <div class="overlay" id="loadingOverlay">
+                <div class="lds-spinner">
+                  <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                </div>
+              </div>
               
             </div>
           </div>

@@ -29,12 +29,16 @@ This project utilizes vanilla HTML, CSS, and JavaScript to allow users to upload
 
 3. I want my uploaded image to be modified by a prompt of my choice
 
+4. I want to be able to reset to upload another image to be generated
+
 ## MVP
 
 1. Get a user photo upload modified using a set of fixed prompts
 
 2. Users should have the ability to add their own prompt
 
+3. A loading animation to help user's now that the AI is working
+
 ## Icebox
 
-1. Including a loading animation to help user's now that the AI is working
+1. Using the devices integrated camera to upload a photo

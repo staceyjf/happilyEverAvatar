@@ -139,8 +139,13 @@ h3 {
 }
 
 /* AI button */
+.button-box-container {
+  display: flex;
+}
+
 .box-button {
-  margin-top: 2vh;
+  margin-top: 1em;
+  margin-right: 1em;;
   padding: 10px 20px;
   border-radius: 10px;
   background: #1F232C;
@@ -153,4 +158,8 @@ h3 {
   background: lightgrey;
   color: grey;
   cursor: not-allowed;
+}
+
+#reset-button {
+  display: none;
 }

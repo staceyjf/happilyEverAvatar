@@ -1,9 +1,9 @@
 // --------------------Global Variables-----------------------
 const dragArea = document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
-const showLoadingWheel = document.getElementById("loadingOverlay");
-const processingStatus = document.getElementById("box_status");
-let button = document.querySelector('.header .button');
+const showLoadingWheel = document.getElementById('loadingOverlay');
+const processingStatus = document.getElementById('box-status');
+let browserButton = document.getElementById('browser-button');
 let input = document.querySelector('input');
 
 let file;
@@ -12,7 +12,7 @@ let fileURL;
 // --------------------Event Listeners-----------------------
 // --------------------Browse LOGIC-----------------------
 // browse 'button' feature
-button.onclick = () => {
+browserButton.onclick = () => {
   input.click();
 };
 
@@ -215,6 +215,7 @@ async function getAvatarImage(fileURL) {
   try {
     const userImageOutput = document.getElementById("generatedImage");
     const inputButton = document.getElementById("AI-input-button");
+    const resetButton = document.getElementById("reset-button");
    
     console.log("fileURL:", fileURL);
 
@@ -235,13 +236,15 @@ async function getAvatarImage(fileURL) {
       // update status message
       processingStatus.innerText = "Success! Your image has been processed.";
       showLoadingWheel.style.display = "none";
-
+      inputButton.disabled = false;
+      resetButton.style.display = "flex";
     }
   } catch (error) {
     console.error("Error for getAvatarImage:", error);
      // update status message
      processingStatus.innerText = "Oh no! Something went wrong. Please try again.";
      inputButton.disabled = false;
+     resetButton.style.display = "flex";
   }
 }
 

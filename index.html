@@ -40,7 +40,7 @@
           <!-- form to upload your image -->
           <div class="form-container">
             <!-- display the result of the upload -->
-            <h2 id="box_status">Upload your image</h2>
+            <h2 id="box-status">Upload your image</h2>
             
             <div class="spinner-container">
               <div class="drag-area">
@@ -49,7 +49,7 @@
                 </div>
                 
                 <span class="header">Drag & Drop</span>
-                <span class="header">or <span class="button">browse</span> </span>
+                <span class="header">or <span class="button" id="browser-button">browse</span> </span>
                 <!-- accept attribute to only allow image files -->
                 <input type="file" hidden>
                 <span class="support">Supports: JPEG, JPG, PNG</span>
@@ -77,8 +77,13 @@
               <label for="disney">Disney Princess</label>
             </div>
           
-          <!--------- Button to upload image to AI ---->  
-          <button type="button" onclick="getAvatarImage(fileURL)" class="box-button" id="AI-input-button">Upload to AI</button>
+            <div class="button-box-container">
+              <!--------- Button to upload image to AI ---->  
+              <button type="button" onclick="getAvatarImage(fileURL)" class="box-button" id="AI-input-button">Upload to AI</button>
+    
+              <!--------- Button to upload image to AI ---->  
+              <button type="button" onclick="reset()" class="box-button" id="reset-button">Start again</button>
+           </div>
 
         </div>
       </div>

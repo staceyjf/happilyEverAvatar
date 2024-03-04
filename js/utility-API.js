@@ -2,9 +2,9 @@
 const dragArea = document.querySelector(".drag-area");
 const dragText = document.querySelector(".header");
 const showLoadingWheel = document.getElementById("loadingOverlay");
-const processingStatus = document.getElementById("box-status");
-const browserButton = document.getElementById("browser-button");
-const browserButtonMobile = document.getElementById("browser-button-mobile");
+const processingStatus = document.getElementById("boxStatus");
+const browserButton = document.getElementById("browserButton");
+const browserButtonMobile = document.getElementById("browserButtonMobile");
 let input = document.querySelector("input");
 
 let file;
@@ -233,8 +233,8 @@ async function uploadImage(file) {
 async function getAvatarImage(fileURL) {
   try {
     const userImageOutput = document.getElementById("generatedImage");
-    const inputButton = document.getElementById("AI-input-button");
-    const resetButton = document.getElementById("reset-button");
+    const inputButton = document.getElementById("AiInputButton");
+    const resetButton = document.getElementById("resetButton");
 
     console.log("fileURL:", fileURL);
 

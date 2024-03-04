@@ -3,9 +3,8 @@ const dragArea = document.querySelector(".drag-area");
 const dragText = document.querySelector(".header");
 const showLoadingWheel = document.getElementById("loadingOverlay");
 const processingStatus = document.getElementById("box-status");
-let browserButton = document.getElementById("browser-button");
-let browserButtonMobile = document.getElementById("browser-button-mobile");
-
+const browserButton = document.getElementById("browser-button");
+const browserButtonMobile = document.getElementById("browser-button-mobile");
 let input = document.querySelector("input");
 
 let file;
@@ -13,11 +12,13 @@ let fileURL;
 
 // --------------------Event Listeners-----------------------
 // --------------------Browse LOGIC-----------------------
+// --------------------Desktop LOGIC-----------------------
 // browse 'button' feature
 browserButton.onclick = () => {
   input.click();
 };
 
+// --------------------Mobile LOGIC-----------------------
 // browse 'button' feature for mobile
 browserButtonMobile.onclick = () => {
   input.click();

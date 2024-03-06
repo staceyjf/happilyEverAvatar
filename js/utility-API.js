@@ -60,6 +60,7 @@ dragArea.addEventListener("drop", async (event) => {
 
 // --------------------File processing LOGIC-----------------------
 function processFile(file) {
+  // as the filereader API is asynchronous, we need to return a promise to handle the result
   return new Promise((resolve, reject) => {
     if (!file) {
       reject(new Error("No file selected."));
@@ -119,6 +120,10 @@ async function makeApiRequest(userImageURL) {
     console.log("User's prompt:", userPrompt);
 
     // define the parameters for the API request eg what data to send to the API
+    // TODO: replace with a free CROS proxy server if I can find one that works
+    // const APIEndpoint =
+    //   "https://test.cors.workers.dev/?" +
+    //   "https://api.replicate.com/v1/predictions";
     // created my own proxy server to bypass CORS error (cors-anywhere hosted on heroku)
     const APIEndpoint =
       "https://floating-oasis-76398-23ee924a082b.herokuapp.com/https://api.replicate.com/v1/predictions";

@@ -4,6 +4,16 @@ main {
   grid-template-rows: auto;
 }
 
+h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+h3 {
+  color: #83746e;
+  font-weight: 500;
+}
+
 /* Column left */
 .column-wrapper {
   text-align: center;
@@ -43,33 +53,22 @@ main {
   align-items: center;
   justify-content: center;
   background: #e0eafc;
-  max-width: 650px;
+  max-width: 50vh;
   width: 100%;
-  padding: 30px;
+  padding: 1em;
   border-radius: 20px;
   box-shadow: 0 8px 24px 0 lightgrey;
 }
 
-h1 {
-  font-size: 3em;
-}
-
-h3 {
-  color: #83746e;
-  font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 2em;
-}
-
 .drag-area {
-  height: 400px;
+  height: 20vh;
   width: 100%;
   border: 3px dashed lightgrey;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10px auto;
+  margin: 1em auto;
 }
 
 .drag-area .icon {
@@ -86,7 +85,7 @@ h3 {
 
 .drag-area .support {
   font-size: 12px;
-  margin: 10px 0 15px 0;
+  margin: 1em 0 1em 0;
 }
 
 .drag-area .button {
@@ -132,15 +131,14 @@ h3 {
   /* padding: 30px; */
 }
 
-.user-prompt > input {
-  margin: 5px 0;
+.user-prompt>input {
+  margin: 0.25em 0;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
 
-.user-prompt > label {
-  /* font-size: 1.2em; */
-  margin-left: 10px;
+.user-prompt>label {
+  margin-left: 0.5em;
 }
 
 /* AI button */
@@ -176,13 +174,16 @@ h3 {
     grid-template-rows: auto auto;
   }
 
+  h1 {
+    font-size: 2em;
+  }
+
   .image-container {
-    height: 200px;
+    height: 30vh;
   }
 
   .column-wrapper {
     text-align: center;
-    margin-bottom: 20px;
   }
 
   .column-right {
@@ -190,11 +191,11 @@ h3 {
   }
 
   .form-container {
-    max-width: 350px;
+    max-width: 50vh;
   }
 
   .drag-area {
-    height: 200px;
+    height: 30vh;
   }
 
   .drag-area .header {

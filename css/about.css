@@ -4,7 +4,7 @@ main {
 }
 
 /* ensures that the content starts at the second column line */
-main > * {
+main>* {
   grid-column: 2;
 }
 
@@ -23,7 +23,7 @@ h3 {
 }
 
 p {
-  margin-top: 5px;
+  margin-top: 0.25em;
   line-height: 1.5;
 }
 

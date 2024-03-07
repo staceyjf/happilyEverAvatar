@@ -125,8 +125,7 @@ async function makeApiRequest(userImageURL) {
     //   "https://test.cors.workers.dev/?" +
     //   "https://api.replicate.com/v1/predictions";
     // created my own proxy server to bypass CORS error (cors-anywhere hosted on heroku)
-    const APIEndpoint =
-      "https://floating-oasis-76398-23ee924a082b.herokuapp.com/https://api.replicate.com/v1/predictions";
+    const APIEndpoint = "https://api.replicate.com/v1/predictions";
     const dataRequestObject = {
       version:
         "6af8583c541261472e92155d87bba80d5ad98461665802f2ba196ac099aaedc9",

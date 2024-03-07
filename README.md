@@ -1,6 +1,6 @@
 # Happily Ever Avatar
 
-Turn your image into a fairy tale avatar with Happily Ever Avatar! 
+Turn your image into a fairy tale avatar with Happily Ever Avatar!
 
 This project utilizes vanilla HTML, CSS, and JavaScript to allow users to upload their images and transform them into magical avatars using the Instant-ID AI API.
 
@@ -43,3 +43,7 @@ Have a play at: [avatar.staceyfanner.com](https://avatar.staceyfanner.com/)
 ## Icebox
 
 1. Using the devices integrated camera to upload a photo
+
+## Challenges
+
+1. Production vs Development: In development, I was facing CORS issues so used a proxy server to act as a go between to solve the issue. Once I deployed it to Github pages, I didn't think to test in a production environment which meant that I didn't need the proxy server.
